@@ -2,9 +2,13 @@ import { createStore } from 'vuex'
 
 const store = createStore({
   state: {
-    name: 'jack'
+    user: {}
   },
-  mutations: {},
+  mutations: {
+    user(state, obj) {
+      state.user = obj
+    }
+  },
   getters: {},
   actions: {}
 })

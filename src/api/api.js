@@ -7,3 +7,17 @@ export const login = (data = {}) => {
     data
   })
 }
+export const getinfo = (data = {}) => {
+  return http({
+    url: '/admin/getinfo',
+    method: 'post',
+    data
+  })
+}
+export const logout = (data = {}) => {
+  return http({
+    url: '/admin/logout',
+    method: 'post',
+    data
+  })
+}

@@ -59,9 +59,12 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { login } from '../../api/api.js'
+import { login, getinfo } from '../../api/api.js'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import { setToken } from '@/composables/auth'
 const router = useRouter()
+const store = useStore()
 const formSize = ref('default')
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive({
@@ -81,6 +84,11 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       console.log('submit!')
       login(ruleForm).then((res) => {
         console.log(res)
+        setToken(res.data.data.token)
+        getinfo().then((res) => {
+          console.log(res)
+          store.commit('user', res)
+        })
         router.push('/index')
       })
     } else {
